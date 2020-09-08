@@ -29,16 +29,37 @@ I think there is real value in centralizing these in a library, potentially with
  * Emilio https://github.com/waterhackweek/waterdata
  * https://github.com/waterhackweek/waterdata/blob/master/mashup_waterbudget.ipynb
 1. https://geoviews.org/user_guide/Resampling_Grids.html
+1. https://github.com/OGGM/oggm
 
 I started compiling newer code in the IS2 Hackweek tutorial: Appendix A, https://github.com/ICESAT-2HackWeek/2020_ICESat-2_Hackweek_Tutorials/blob/master/05.Geospatial_Analysis/shean_ICESat-2_hackweek_tutorial_GeospatialAnalysis_rendered.ipynb.  Realizing that the scipy.ndimage.map_coordinates approach has an issue in the rendered notebook…
 
 @scottyhq provided the following for xarray interpolation:
 xarray interpolation example here https://github.com/ICESAT-2HackWeek/pangeo-demo. Note that xarray is using numpy behind the scenes, and in this case scipy.interpolate http://xarray.pydata.org/en/stable/generated/xarray.DataArray.interp.html. Note that you can get rendered versions of hvplot if the repo is public and you use an nbviewer link (https://nbviewer.jupyter.org/github/ICESAT-2HackWeek/pangeo-demo/blob/master/atl06-sample-rendered.ipynb)
+http://xarray.pydata.org/en/stable/interpolation.html#advanced-interpolation
 Thread from pangeo and IS2 Hackweek Slack:
 * you can change x and y from lists to DataArrays with a new dimension (‘z’) e.g.  x = xr.DataArray([x1, x2, x3], dims='z')
 
+# Scaling
+1. scipy ndinterp - create interpolator once, use multiple times: https://github.com/SmithB/pointCollection
+1. https://github.com/SmithB/LSsurf use lsq solver to do this, build equations
+1. MPI tile-based loading/sampling, using scipy splines: https://github.com/tsutterley/read-ICESat-2/blob/master/scripts/MPI_DEM_ICESat2_ATL06.py
+ * challenges around parallel HDF5, https://docs.h5py.org/en/stable/mpi.html
+
 # Issues
 * Handling of nodata gaps
-* Performance
+* Performance for large point arrays, large rasters
 * Input raster cell dimensions vs point sampling density
 * Handling of different raster data types (e.g., only use nearest for classified rasters)
+* Best solution for raster properties (e.g., large gradients, spatial frequency content)
+* xarray - great for ndarrays from GCMs, most efficient ways to chunk large point coordinate arrays, perform operations
+
+## ATL06
+* Already has DEM attributes in ATL06, ArcticDEM/REMA (reverts to GDEM) - Jeff Lee implemented
+
+# Candidate use cases
+* Simple use case: starting with point coordinates in NumPy arrays, raster DEM as GeoTiff
+* More advanced use case: GCM reanalysis data, xyzt point coordinates
+
+# Next steps
+* Review resources listed above, compile notes
+* Start creating notebooks with snippet for approach or specific problem, links to documentation
