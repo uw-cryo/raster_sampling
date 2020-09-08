@@ -25,6 +25,10 @@ I think there is real value in centralizing these in a library, potentially with
   * https://github.com/SmithB/pointCollection
   * https://github.com/tsutterley/spatial-interpolators
   * captoolkit?
+1. regionmask: https://regionmask.readthedocs.io/en/stable/
+ * Emilio https://github.com/waterhackweek/waterdata
+ * https://github.com/waterhackweek/waterdata/blob/master/mashup_waterbudget.ipynb
+1. https://geoviews.org/user_guide/Resampling_Grids.html
 
 I started compiling newer code in the IS2 Hackweek tutorial: Appendix A, https://github.com/ICESAT-2HackWeek/2020_ICESat-2_Hackweek_Tutorials/blob/master/05.Geospatial_Analysis/shean_ICESat-2_hackweek_tutorial_GeospatialAnalysis_rendered.ipynb.  Realizing that the scipy.ndimage.map_coordinates approach has an issue in the rendered notebook…
 
