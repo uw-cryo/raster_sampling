@@ -27,6 +27,7 @@ There is value in general implementation of different approaches in a centralize
 1. `scipy` interpolation options (for a local window of raster pixels)
 1. `demquery` https://github.com/kylebarron/demquery (thanks to @scottyhq!)
 1. `xarray` interpolation and sampling (http://xarray.pydata.org/en/stable/interpolation.html#advanced-interpolation)
+    * Great discussion on these topics (and cross-referenced issues/PRs): https://github.com/pydata/xarray/issues/475
     * @scottyhq provided the following for xarray interpolation:
     * https://github.com/ICESAT-2HackWeek/pangeo-demo
         * Note that xarray is using numpy behind the scenes, and in this case scipy.interpolate http://xarray.pydata.org/en/stable/generated/xarray.DataArray.interp.html. 
