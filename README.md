@@ -44,6 +44,8 @@ There is value in general implementation of different approaches in a centralize
 
 1. https://geoviews.org/user_guide/Resampling_Grids.html (suggested by Friedrich)
 1. https://github.com/OGGM/oggm
+1. https://pyresample.readthedocs.io/en/latest/
+1. https://docs.generic-mapping-tools.org/dev/grdtrack.html
 
 # Scaling Considerations
 1. scipy ndinterp - create interpolator once, use multiple times
