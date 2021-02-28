@@ -18,8 +18,11 @@ There is value in general implementation of different approaches in a centralize
 1. `rasterio` sample for 2D raster
     * @dshean started compiling raster sampling code in the IS2 Hackweek tutorial 
     * Appendix A of mega-notebook: https://github.com/ICESAT-2HackWeek/2020_ICESat-2_Hackweek_Tutorials/blob/master/05.Geospatial_Analysis/shean_ICESat-2_hackweek_tutorial_GeospatialAnalysis_rendered.ipynb.
-1. `rasterstats` zonal statistics
-    * See @dshean tutorial above for some references
+1. Zonal statistics (local window or circular region)
+    * See @dshean tutorial above for some references for local window (and circular) sampling
+      * https://github.com/dshean/demcoreg/blob/master/demcoreg/sample_raster_at_pts.py
+      * https://github.com/dshean/pygeotools/blob/master/pygeotools/lib/geolib.py#L1019
+    * `rasterstats` - buffer around points
     * [Simple function](https://github.com/ICESAT-2HackWeek/topohack/blob/7194c6ea87bb41cc9dad38cbbef230391fbf7877/topolib/gda_lib.py#L247) to implement sampling using a buffer distance and zonal statistics
     * `regionmask`: https://regionmask.readthedocs.io/en/stable/ (suggested by Emilio)
         * https://github.com/waterhackweek/waterdata
