@@ -31,6 +31,14 @@ There is value in general implementation of different approaches in a centralize
 1. `scipy` interpolation options (for a local window of raster pixels)
 1. `demquery` https://github.com/kylebarron/demquery (thanks to @scottyhq!)
 1. `xarray` interpolation and sampling (http://xarray.pydata.org/en/stable/interpolation.html#advanced-interpolation)
+    * Example for GeoDataFrame containing ICESat-2 points (creates new dimension "z" to store output):
+    ```
+    x = xr.DataArray(alt06_sr_proj_crop.geometry.x.values, dims=“z”)
+    y = xr.DataArray(alt06_sr_proj_crop.geometry.y.values, dims=“z”)
+    s = dem.interp(x=x, y=y) #default method is linear
+    alt06_sr_proj_crop[‘dem’] = s.values
+    alt06_sr_proj_crop[‘h_mean diff’] = alt06_sr_proj_crop[‘h_mean’] - alt06_sr_proj_crop[‘dem’]
+    ```
     * Great discussion on these topics (and cross-referenced issues/PRs): https://github.com/pydata/xarray/issues/475
     * @scottyhq provided the following for xarray interpolation:
     * https://github.com/ICESAT-2HackWeek/pangeo-demo
