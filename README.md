@@ -31,13 +31,28 @@ There is value in general implementation of different approaches in a centralize
 1. `scipy` interpolation options (for a local window of raster pixels)
 1. `demquery` https://github.com/kylebarron/demquery (thanks to @scottyhq!)
 1. `xarray` interpolation and sampling (http://xarray.pydata.org/en/stable/interpolation.html#advanced-interpolation)
-    * Example for GeoDataFrame containing ICESat-2 points (creates new dimension "z" to store output):
+    * Example for GeoDataFrame of points points (creates new dimension "z" to store output):
     ```
-    x = xr.DataArray(alt06_sr_proj_crop.geometry.x.values, dims=“z”)
-    y = xr.DataArray(alt06_sr_proj_crop.geometry.y.values, dims=“z”)
-    s = dem.interp(x=x, y=y) #default method is linear
-    alt06_sr_proj_crop[‘dem’] = s.values
-    alt06_sr_proj_crop[‘h_mean diff’] = alt06_sr_proj_crop[‘h_mean’] - alt06_sr_proj_crop[‘dem’]
+    import xarray, rioxarray, geopandas
+
+    #Open raster dataset to sample
+    dem = rioxarray.open_rasterio("dem.tif")
+
+    #Open point vector dataset and reproject
+    gdf = geopandas.read_file("points.geojson").to_crs(dem.rio.crs)
+
+    #Add z dimension to store samples
+    x = xarray.DataArray(gdf.geometry.x.values, dims=“z”)
+    y = xarray.DataArray(gdf.geometry.y.values, dims=“z”)
+
+    #Sample the raster
+    samples = dem.interp(x=x, y=y) #default method is linear
+
+    #Add to the geodataframe
+    gdf[‘dem’] = samples.values
+
+    #Compute difference with values in another column
+    gdf[‘h_mean diff’] = gdf[‘h_mean’] - gdf[‘dem’]
     ```
     * Great discussion on these topics (and cross-referenced issues/PRs): https://github.com/pydata/xarray/issues/475
     * @scottyhq provided the following for xarray interpolation:
